@@ -235,12 +235,12 @@ class Store {
 
 # We Do: Building a Counter in Redux (30 min)
 
-[Building a Counter in Redux](https://github.com/ga-wdi-exercises/react-redux-counter)
+[Building a Counter in Redux](https://git.generalassemb.ly/ga-wdi-exercises/react-redux-counter)
 
 
 # We Do: Shopping Cart in Redux (45 min)
 
-[Building a Shopping Cart in Redux](https://github.com/ga-wdi-exercises/react-redux-shopping-cart)
+[Building a Shopping Cart in Redux](https://git.generalassemb.ly/ga-wdi-exercises/react-redux-shopping-cart)
 
 
 # Appendix
