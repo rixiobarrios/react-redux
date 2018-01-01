@@ -150,13 +150,10 @@ const arr = ['fish', 'bird', 'dog', 'monkey', 'turtle']
 
 1. Add `cat` and `mouse` to the array
 <details>
-<summary> Solution </summary>
-```js
-const addArr = (arr) => [...arr, 'cat', 'mouse']
-```
-or...```js
-const addArr = (arr) => arr.concat('cat', 'mouse')
-```
+  <summary> Solution </summary>
+  ```js
+  const addArr = (arr) => [...arr, 'cat', 'mouse']
+  ```
 </details>
 
 
@@ -191,7 +188,7 @@ const obj = {
 
 4. Change occupation from 'author' to 'writer'
 <details>
-<summary> Solution </summary>
+  <summary> Solution </summary>
 <br>
 ```js
 const changeOcc = obj => Object.assign({}, obj, {occupation: 'writer'})
