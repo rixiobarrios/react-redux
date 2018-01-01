@@ -174,12 +174,12 @@ const addFront = (arr) => [].concat('snake', arr)
 <details>
 <summary> Solution </summary>
 <br>
-```js
+<code>
 const removeArr = (arr, animalName) => {
   let index = arr.indexOf(animalName)
   return arr.slice(0, index).concat(arr.slice(index + 1))
 }
-```
+</code>
 </details>
 
 ```js
