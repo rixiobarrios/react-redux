@@ -151,9 +151,10 @@ const arr = ['fish', 'bird', 'dog', 'monkey', 'turtle']
 1. Add `cat` and `mouse` to the array
 <details>
 <summary> Solution </summary>
-<br>
 ```js
 const addArr = (arr) => [...arr, 'cat', 'mouse']
+```
+or...```js
 const addArr = (arr) => arr.concat('cat', 'mouse')
 ```
 </details>
@@ -162,7 +163,6 @@ const addArr = (arr) => arr.concat('cat', 'mouse')
 2. Add 'snake' to the front of the array
 <details>
 <summary> Solution </summary>
-<br>
 ```js
 const addFront = (arr) => ['snake', ...arr]
 const addFront = (arr) => [].concat('snake', arr)
@@ -173,13 +173,12 @@ const addFront = (arr) => [].concat('snake', arr)
 3. Delete 'monkey' from the array
 <details>
 <summary> Solution </summary>
-<br>
-<code>
+```js
 const removeArr = (arr, animalName) => {
   let index = arr.indexOf(animalName)
   return arr.slice(0, index).concat(arr.slice(index + 1))
 }
-</code>
+```
 </details>
 
 ```js
