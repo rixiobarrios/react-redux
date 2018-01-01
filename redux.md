@@ -151,9 +151,13 @@ const arr = ['fish', 'bird', 'dog', 'monkey', 'turtle']
 1. Add `cat` and `mouse` to the array
 <details>
   <summary> Solution </summary>
-  ```js
-  const addArr = (arr) => [...arr, 'cat', 'mouse']
-  ```
+    <code>
+      const addArr = (arr) => [...arr, 'cat', 'mouse']
+    </code>
+    or...
+    <code>
+      const addArr = (arr) => arr.concat('cat', 'mouse')
+    </code>
 </details>
 
 
