@@ -58,6 +58,7 @@ This means that the **pure function** is *only concerned* with returning some ou
 
 Impure functions include:
   - `Math.random()`
+  - `new Date().getTime()`
   - `$.ajax()`
 
 Part of the power of React is this very idea applied to views. We pass in props a component, and we get the same predictable component every time.
@@ -123,7 +124,7 @@ let todos = [
     {todo: "hang tight"},
     {todo: "stay loose"}
 ]
-let todosCopy = todos.map(obj => Object.assign({},obj))
+let todosCopy = todos.map(obj => Object.assign({}, obj))
 ```
 
 
@@ -139,6 +140,105 @@ It's an easy mistake to make, since there is a one letter difference.
 
 `.slice()` ***is not a mutator method***. Use it for ***copying*** all or part of an array!
 
+
+## You Do: Practice with Immutable Data and Pure Functions (20 min)
+> Write pure functions to complete the following without mutating state
+
+```js
+const arr = ['fish', 'bird', 'dog', 'monkey', 'turtle']
+```
+
+1. Add `cat` and `mouse` to the array
+<details>
+<summary> Solution </summary>
+<br>
+```js
+const addArr = (arr) => [...arr, 'cat', 'mouse']
+const addArr = (arr) => arr.concat('cat', 'mouse')
+```
+</details>
+
+
+2. Add 'snake' to the front of the array
+<details>
+<summary> Solution </summary>
+<br>
+```js
+const addFront = (arr) => ['snake', ...arr]
+const addFront = (arr) => [].concat('snake', arr)
+```
+</details>
+
+
+3. Delete 'monkey' from the array
+<details>
+<summary> Solution </summary>
+<br>
+```js
+const removeArr = (arr, animalName) => {
+  let index = arr.indexOf(animalName)
+  return arr.slice(0, index).concat(arr.slice(index + 1))
+}
+```
+</details>
+
+```js
+const obj = {
+  lastName: 'Asimov',
+  occupation: 'author',
+  books: ['Foundation', 'I, Robot']
+}
+```
+
+4. Change occupation from 'author' to 'writer'
+<details>
+<summary> Solution </summary>
+<br>
+```js
+const changeOcc = obj => Object.assign({}, obj, {occupation: 'writer'})
+const changeOcc = obj => ({...obj, occupation: 'writer'})
+```
+</details>
+
+
+5. Give the author a 'firstName' key with the value 'Isaac'
+<details>
+<summary> Solution </summary>
+<br>
+```js
+const addName = obj => Object.assign({}, obj, {firstName: 'Issac'})
+const addName = obj => ({...obj, firstName: 'Isaac'})
+```
+</details>
+
+
+6. Add 'Pebble in the Sky' to the array of books
+<details>
+<summary> Solution </summary>
+<br>
+```js
+const addBook = obj => ({...obj, books: obj.books.concat('Pebble in the Sky')})
+```
+</details>
+
+```js
+let todos = [
+    {todo: "learn to thrash"},
+    {todo: "learn redux"},
+    {todo: "hang tight"},
+    {todo: "stay loose"}
+]
+```
+
+
+7. Give each todo a 'completed' field with value 'false'
+<details>
+<summary> Solution </summary>
+<br>
+```js
+const addComplete = todos => todos.map(todo => ({...todo, completed: false}))
+```
+</details>
 
 ---
 
@@ -235,4 +335,3 @@ class Store {
 # We Do: Building a Counter in Redux (30 min)
 
 [Building a Counter in Redux](https://git.generalassemb.ly/ga-wdi-exercises/react-redux-counter)
-
