@@ -201,57 +201,63 @@ const obj = {
       const addArr = (arr) => [...arr, 'cat', 'mouse']
     ```
 
-    <br>
     or...
-    <br>
-    <code>
+
+    ```js
       const addArr = (arr) => arr.concat('cat', 'mouse')
-    </code>
-    <h4>2.</h4>
-    <code>
+    ```
+
+    #### 2.
+    ```js
       const addFront = (arr) => ['snake', ...arr]
-    </code>
-    <br>
+    ```
+
     or...
-    <br>
-    <code>
+
+    ```js
       const addFront = (arr) => [].concat('snake', arr)
-    </code>
-    <h4>3.</h4>
-    <code>
+    ```
+
+    #### 3.
+    ```js
     const removeArr = (arr, animalName) => {
       let index = arr.indexOf(animalName)
       return arr.slice(0, index).concat(arr.slice(index + 1))
     }
-    </code>
-    <h4>4.</h4>
-    <code>
+    ```
+
+    #### 4.
+    ```js
       const changeOcc = obj => Object.assign({}, obj, {occupation: 'writer'})
-    </code>
-    <br>
+    ```
+
     or...
-    <br>
-    <code>
+
+    ```js
       const changeOcc = obj => ({...obj, occupation: 'writer'})
-    </code>
-    <h4>5.</h4>
-    <code>
+    ```
+
+    #### 5.
+    ```js
       const addName = obj => Object.assign({}, obj, {firstName: 'Issac'})
-    </code>
-    <br>
+    ```
+
     or...
-    <br>
-    <code>
+
+    ```js
       const addName = obj => ({...obj, firstName: 'Isaac'})
-    </code>
-    <h4>6.</h4>
-    <code>
+    ```
+
+    #### 6.
+    ```js
       const addBook = obj => ({...obj, books: obj.books.concat('Pebble in the Sky')})
-    </code>
-    <h4>7.</h4>
-    <code>
+    ```
+
+    #### 7.
+    ```js
       const addComplete = todos => todos.map(todo => ({...todo, completed: false}))
-    </code>
+    ```
+
 </details>
 
 ---
