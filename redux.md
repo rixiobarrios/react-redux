@@ -16,7 +16,7 @@ This really begins to become an issue for developers as applications scale, incr
 Redux is extremely opinionated and entails writing applications with heavy limitations.
 
 <details>
-  <summary>There are [3 fundamental principles of Redux](https://github.com/reactjs/redux/blob/master/docs/introduction/ThreePrinciples.md)</summary>
+  <summary>There are <a href='https://github.com/reactjs/redux/blob/master/docs/introduction/ThreePrinciples.md'>3 fundamental principles of Redux</a></summary>
   <h3>1. Single source of Truth</h3>
   <p>The state of your whole application is stored in an object tree within a single store.</p>
   <h3>2. State is read only</h3>
