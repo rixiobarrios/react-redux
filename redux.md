@@ -190,13 +190,15 @@ const obj = {
     ]
     ```
 
-7. Give each todo a 'completed' field with value 'false'
+7. Give each todo a 'completed' field with value 'false'  
 
 
 <details>
-  <summary><strong> Solutions, <em> try not to peak</em>... </strong></summary>
+  <summary><strong> Solutions, <em> try not to peak</em>...</strong></summary>
+
 
     #### 1.
+
     ```js
       const addArr = (arr) => [...arr, 'cat', 'mouse']
     ```
@@ -208,6 +210,7 @@ const obj = {
     ```
 
     #### 2.
+
     ```js
       const addFront = (arr) => ['snake', ...arr]
     ```
@@ -219,6 +222,7 @@ const obj = {
     ```
 
     #### 3.
+
     ```js
     const removeArr = (arr, animalName) => {
       let index = arr.indexOf(animalName)
@@ -227,6 +231,7 @@ const obj = {
     ```
 
     #### 4.
+
     ```js
       const changeOcc = obj => Object.assign({}, obj, {occupation: 'writer'})
     ```
@@ -238,6 +243,7 @@ const obj = {
     ```
 
     #### 5.
+
     ```js
       const addName = obj => Object.assign({}, obj, {firstName: 'Issac'})
     ```
@@ -249,14 +255,17 @@ const obj = {
     ```
 
     #### 6.
+
     ```js
       const addBook = obj => ({...obj, books: obj.books.concat('Pebble in the Sky')})
     ```
 
     #### 7.
+
     ```js
       const addComplete = todos => todos.map(todo => ({...todo, completed: false}))
     ```
+    
 
 </details>
 
