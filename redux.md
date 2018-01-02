@@ -193,79 +193,80 @@ const obj = {
 7. Give each todo a 'completed' field with value 'false'  
 
 
+
 <details>
-  <summary><strong> Solutions, <em> try not to peak</em>...</strong></summary>
+  <summary><strong> Solutions, <em> try not to peak... </em></strong></summary>
 
 
-    #### 1.
+  #### 1.
 
-    ```js
-      const addArr = (arr) => [...arr, 'cat', 'mouse']
-    ```
+  ```js
+    const addArr = (arr) => [...arr, 'cat', 'mouse']
+  ```
 
-    or...
+  or...
 
-    ```js
-      const addArr = (arr) => arr.concat('cat', 'mouse')
-    ```
+  ```js
+    const addArr = (arr) => arr.concat('cat', 'mouse')
+  ```
 
-    #### 2.
+  #### 2.
 
-    ```js
-      const addFront = (arr) => ['snake', ...arr]
-    ```
+  ```js
+    const addFront = (arr) => ['snake', ...arr]
+  ```
 
-    or...
+  or...
 
-    ```js
-      const addFront = (arr) => [].concat('snake', arr)
-    ```
+  ```js
+    const addFront = (arr) => [].concat('snake', arr)
+  ```
 
-    #### 3.
+  #### 3.
 
-    ```js
-    const removeArr = (arr, animalName) => {
-      let index = arr.indexOf(animalName)
-      return arr.slice(0, index).concat(arr.slice(index + 1))
-    }
-    ```
+  ```js
+  const removeArr = (arr, animalName) => {
+    let index = arr.indexOf(animalName)
+    return arr.slice(0, index).concat(arr.slice(index + 1))
+  }
+  ```
 
-    #### 4.
+  #### 4.
 
-    ```js
-      const changeOcc = obj => Object.assign({}, obj, {occupation: 'writer'})
-    ```
+  ```js
+    const changeOcc = obj => Object.assign({}, obj, {occupation: 'writer'})
+  ```
 
-    or...
+  or...
 
-    ```js
-      const changeOcc = obj => ({...obj, occupation: 'writer'})
-    ```
+  ```js
+    const changeOcc = obj => ({...obj, occupation: 'writer'})
+  ```
 
-    #### 5.
+  #### 5.
 
-    ```js
-      const addName = obj => Object.assign({}, obj, {firstName: 'Issac'})
-    ```
+  ```js
+    const addName = obj => Object.assign({}, obj, {firstName: 'Issac'})
+  ```
 
-    or...
+  or...
 
-    ```js
-      const addName = obj => ({...obj, firstName: 'Isaac'})
-    ```
+  ```js
+    const addName = obj => ({...obj, firstName: 'Isaac'})
+  ```
 
-    #### 6.
+  #### 6.
 
-    ```js
-      const addBook = obj => ({...obj, books: obj.books.concat('Pebble in the Sky')})
-    ```
+  ```js
+    const addBook = obj => ({...obj, books: obj.books.concat('Pebble in the Sky')})
+  ```
 
-    #### 7.
+  #### 7.
 
-    ```js
-      const addComplete = todos => todos.map(todo => ({...todo, completed: false}))
-    ```
-    
+  ```js
+    const addComplete = todos => todos.map(todo => ({...todo, completed: false}))
+  ```
+
 
 </details>
 
