@@ -8,12 +8,23 @@
 - Explain what problem Redux Solves
 - Talk through updating state in an app that uses Redux
 
-# What is Redux? (0:05, 5 min)
+## What is Redux? (5 min, 2:35)
 
 Redux is a state management library.
 It solves the problem of having a bunch of localized component states by funneling them into a central hub.
 This really begins to become an issue for developers as applications scale, increasing in complexity and size.
 Redux is extremely opinionated and entails writing applications with heavy limitations.
+
+<details>
+  <summary>There are [3 fundamental principles of Redux](https://github.com/reactjs/redux/blob/master/docs/introduction/ThreePrinciples.md)</summary>
+  <h3>1. Single source of Truth</h3>
+  <p>The state of your whole application is stored in an object tree within a single store.</p>
+  <h3>2. State is read only</h3>
+  <p>The only way to change the state is to emit an action, an object describing what happened.</p>
+  <h3>3. Changes are made with pure functions</h3>
+  <p>To specify how the state tree is transformed by actions, you write pure reducers.</p>
+</details>
+
 
 The limits Redux imposes don't necessarily restrict what you write so much as how you write it.
 
@@ -21,7 +32,7 @@ With the [Redux Devtools Chrome Extension](https://chrome.google.com/webstore/de
 
 **Take a moment to install the [Redux Devtools Chrome Extension](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd?hl=en)**
 
-# Use Case (0:15, 10 min)
+## Use Case (10 min, 2:45)
 
 Let's take 5 minutes to read through a blog post written by the creator of Redux, Dan Abramov.
 
@@ -49,7 +60,7 @@ Functional programming presents us with the challenge of having to think in new 
 
 ---
 
-# Functional Programming and the React Ecosystem (0:25, 10 min)
+## Functional Programming and the React Ecosystem (10 min, 2:55)
 
 You may hear developers talking about how functional programming is revolutionizing Javascript and wonder how this is so.
 Let's revisit the concept of a pure function: given any input, a ***pure function*** will return the exact same output.
@@ -58,6 +69,7 @@ This means that the **pure function** is *only concerned* with returning some ou
 
 Impure functions include:
   - `Math.random()`
+  - `new Date().getTime()`
   - `$.ajax()`
 
 Part of the power of React is this very idea applied to views. We pass in props a component, and we get the same predictable component every time.
@@ -68,9 +80,9 @@ It also creates a modular architecture that allows a library like Redux to inter
 Redux will use functional programming's approach to function composition: reusing certain functions in the construction of other functions.
 Ultimately, these aggregated functions will provide the functionality of Redux.
 
-# Concepts of Redux
+## Concepts of Redux
 
-## Application State &  Immutability in Redux (0:40, 15 min)
+### Application State &  Immutability in Redux (15 min, 3:10)
 
 Simply put, state is a representation of your application's data. Redux manages your application's state, encapsulating the data stored in your variables, in something called **The Store**.
 When using Redux, we want to treat application state in such a way that it is always ***copied*** and never directly mutated.
@@ -123,7 +135,7 @@ let todos = [
     {todo: "hang tight"},
     {todo: "stay loose"}
 ]
-let todosCopy = todos.map(obj => Object.assign({},obj))
+let todosCopy = todos.map(obj => Object.assign({}, obj))
 ```
 
 
@@ -140,11 +152,131 @@ It's an easy mistake to make, since there is a one letter difference.
 `.slice()` ***is not a mutator method***. Use it for ***copying*** all or part of an array!
 
 
+### You Do: Practice with Immutable Data and Pure Functions (20 min, 3:30)
+> Write pure functions to complete the following without mutating state
+
+```js
+const arr = ['fish', 'bird', 'dog', 'monkey', 'turtle']
+```
+
+1. Add `cat` and `mouse` to the array
+
+2. Add 'snake' to the front of the array
+
+3. Delete 'monkey' from the array
+
+
+```js
+const obj = {
+  lastName: 'Asimov',
+  occupation: 'author',
+  books: ['Foundation', 'I, Robot']
+}
+```
+
+4. Change occupation from 'author' to 'writer'
+
+5. Give the author a 'firstName' key with the value 'Isaac'
+
+6. Add 'Pebble in the Sky' to the array of books
+
+
+    ```js
+    let todos = [
+        {todo: "learn to thrash"},
+        {todo: "learn redux"},
+        {todo: "hang tight"},
+        {todo: "stay loose"}
+    ]
+    ```
+
+7. Give each todo a 'completed' field with value 'false'  
+
+
+
+<details>
+  <summary><strong> Solutions, <em> try not to peak... </em></strong></summary>
+
+
+  #### 1.
+
+  ```js
+    const addArr = (arr) => [...arr, 'cat', 'mouse']
+  ```
+
+  or...
+
+  ```js
+    const addArr = (arr) => arr.concat('cat', 'mouse')
+  ```
+
+  #### 2.
+
+  ```js
+    const addFront = (arr) => ['snake', ...arr]
+  ```
+
+  or...
+
+  ```js
+    const addFront = (arr) => [].concat('snake', arr)
+  ```
+
+  #### 3.
+
+  ```js
+  const removeArr = (arr, animalName) => {
+    let index = arr.indexOf(animalName)
+    return arr.slice(0, index).concat(arr.slice(index + 1))
+  }
+  ```
+
+  #### 4.
+
+  ```js
+    const changeOcc = obj => Object.assign({}, obj, {occupation: 'writer'})
+  ```
+
+  or...
+
+  ```js
+    const changeOcc = obj => ({...obj, occupation: 'writer'})
+  ```
+
+  #### 5.
+
+  ```js
+    const addName = obj => Object.assign({}, obj, {firstName: 'Issac'})
+  ```
+
+  or...
+
+  ```js
+    const addName = obj => ({...obj, firstName: 'Isaac'})
+  ```
+
+  #### 6.
+
+  ```js
+    const addBook = obj => ({...obj, books: obj.books.concat('Pebble in the Sky')})
+  ```
+
+  #### 7.
+
+  ```js
+    const addComplete = todos => todos.map(todo => ({...todo, completed: false}))
+  ```
+
+
+</details>
+
 ---
 
-# Elements of Redux (1:00, 20 min)
+## Break (10 min, 3:40)
 
-## The Store
+## Elements of Redux (20 min, 4:00)
+
+### The Store
 
 The store is a kind of hub that all the information (**application state**) in a program flows through. **The store** encapsulates not only the data in the program, but also controls the flow of program data, storing each change in a separate state. Redux even gives us the ability to time travel through our application's history of application states. It's like the principles of git applied to application-state rather than file-state.
 
@@ -157,7 +289,7 @@ This becomes the next state of the program, spat out by the reducer.
 Every time an action has been dispatched via the reducer, we want to update the UI. So we subscribe the render method to any changes taking places to the application's state object.
 
 
-## Actions
+### Actions
 
 An action is a garden-variety Javascript object that describes what kind of change is to take place, specifying what change to make to what data.
 
@@ -172,11 +304,11 @@ The minimum requirement for an action is that the action must have a type proper
 </details>
 
 
-## The Reducer
+### The Reducer
 
 The reducer specifies how actions update the state of the application, generating the next application-state.
 
-# A Model of the Store
+## A Model of the Store
 
 This is an approximation of a store.
 
@@ -191,7 +323,7 @@ class Store {
     return this.state
   }
 
-  // the ONE FUNCTION that handle any and all updates to our application-state
+  // the ONE FUNCTION that handles any and all updates to our application-state
   reducer(action, state){
     // decides what type of state change
     switch (action.type) {
@@ -218,21 +350,28 @@ class Store {
 }
 ```
 
-## Additional Store Methods
-
-0. `.getState()`
+### Additional Store Methods
 
   - `store.getState()`
-
-0. `.dispatch({})`  
+  > Get back current state of your application
 
   - `store.dispatch({ type: "ACTION_TYPE" })`
-
-0. `.subscribe()`
+  > Perform a certain action which changes state
 
   - `store.subscribe(this.render)`
+  > Called when an action is dispatched
 
-# We Do: Building a Counter in Redux (30 min)
+
+## We Do: Building a Counter in Redux (50 min, 4:50)
 
 [Building a Counter in Redux](https://git.generalassemb.ly/ga-wdi-exercises/react-redux-counter)
 
+
+## Closing Questions / Review (Rest of Class)
+
+- What are some problems Redux solves?
+- What are the 3 principles of Redux?
+- What does it mean for state to be 'immutable'?
+- What is the difference between pure and impure functions?
+- Where does your state live in a Redux application?
+- Define what 'store', 'reducers', and 'actions' are in the context of redux
