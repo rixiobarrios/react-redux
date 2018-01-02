@@ -15,6 +15,17 @@ It solves the problem of having a bunch of localized component states by funneli
 This really begins to become an issue for developers as applications scale, increasing in complexity and size.
 Redux is extremely opinionated and entails writing applications with heavy limitations.
 
+<details>
+  <summary>There are [3 fundamental principles of Redux](https://github.com/reactjs/redux/blob/master/docs/introduction/ThreePrinciples.md)</summary>
+  <h3>1. Single source of Truth</h3>
+  <p>The state of your whole application is stored in an object tree within a single store.</p>
+  <h3>2. State is read only</h3>
+  <p>The only way to change the state is to emit an action, an object describing what happened.</p>
+  <h3>3. Changes are made with pure functions</h3>
+  <p>To specify how the state tree is transformed by actions, you write pure reducers.</p>
+</details>
+
+
 The limits Redux imposes don't necessarily restrict what you write so much as how you write it.
 
 With the [Redux Devtools Chrome Extension](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd?hl=en), we have the ability to see and interact with the data in our programs as if it were a movie we could pause, play, rewind, and fast-forward.
@@ -292,7 +303,7 @@ class Store {
     return this.state
   }
 
-  // the ONE FUNCTION that handle any and all updates to our application-state
+  // the ONE FUNCTION that handles any and all updates to our application-state
   reducer(action, state){
     // decides what type of state change
     switch (action.type) {
@@ -321,18 +332,24 @@ class Store {
 
 ## Additional Store Methods
 
-0. `.getState()`
-
   - `store.getState()`
-
-0. `.dispatch({})`  
+  > Get back current state of your application
 
   - `store.dispatch({ type: "ACTION_TYPE" })`
-
-0. `.subscribe()`
+  > Perform a certain action which changes state
 
   - `store.subscribe(this.render)`
+  > Called when an action is dispatched
 
 # We Do: Building a Counter in Redux (30 min)
 
 [Building a Counter in Redux](https://git.generalassemb.ly/ga-wdi-exercises/react-redux-counter)
+
+
+# Closing Questions (5 min)
+
+- What are the 3 principles of Redux?
+- What does it mean for state to be 'immutable'?
+- What is the difference between pure and impure functions?
+- Where does your state live in a Redux application?
+- Define what 'store', 'reducers', and 'actions' are in the context of redux
