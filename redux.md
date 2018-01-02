@@ -149,38 +149,11 @@ const arr = ['fish', 'bird', 'dog', 'monkey', 'turtle']
 ```
 
 1. Add `cat` and `mouse` to the array
-<details>
-  <summary> Solution </summary>
-    <code>
-      const addArr = (arr) => [...arr, 'cat', 'mouse']
-    </code>
-    or...
-    <code>
-      const addArr = (arr) => arr.concat('cat', 'mouse')
-    </code>
-</details>
-
 
 2. Add 'snake' to the front of the array
-<details>
-<summary> Solution </summary>
-```js
-const addFront = (arr) => ['snake', ...arr]
-const addFront = (arr) => [].concat('snake', arr)
-```
-</details>
-
 
 3. Delete 'monkey' from the array
-<details>
-<summary> Solution </summary>
-```js
-const removeArr = (arr, animalName) => {
-  let index = arr.indexOf(animalName)
-  return arr.slice(0, index).concat(arr.slice(index + 1))
-}
-```
-</details>
+
 
 ```js
 const obj = {
@@ -191,35 +164,11 @@ const obj = {
 ```
 
 4. Change occupation from 'author' to 'writer'
-<details>
-  <summary> Solution </summary>
-<br>
-```js
-const changeOcc = obj => Object.assign({}, obj, {occupation: 'writer'})
-const changeOcc = obj => ({...obj, occupation: 'writer'})
-```
-</details>
-
 
 5. Give the author a 'firstName' key with the value 'Isaac'
-<details>
-<summary> Solution </summary>
-<br>
-```js
-const addName = obj => Object.assign({}, obj, {firstName: 'Issac'})
-const addName = obj => ({...obj, firstName: 'Isaac'})
-```
-</details>
-
 
 6. Add 'Pebble in the Sky' to the array of books
-<details>
-<summary> Solution </summary>
-<br>
-```js
-const addBook = obj => ({...obj, books: obj.books.concat('Pebble in the Sky')})
-```
-</details>
+
 
 ```js
 let todos = [
@@ -230,14 +179,66 @@ let todos = [
 ]
 ```
 
-
 7. Give each todo a 'completed' field with value 'false'
+
+
 <details>
-<summary> Solution </summary>
-<br>
-```js
-const addComplete = todos => todos.map(todo => ({...todo, completed: false}))
-```
+  <summary><strong> Solutions, <em> try not to peak</em>... </strong></summary>
+    <h4>1.</h4>
+    <code>
+      const addArr = (arr) => [...arr, 'cat', 'mouse']
+    </code>
+    <br>
+    or...
+    <br>
+    <code>
+      const addArr = (arr) => arr.concat('cat', 'mouse')
+    </code>
+    <h4>2.</h4>
+    <code>
+      const addFront = (arr) => ['snake', ...arr]
+    </code>
+    <br>
+    or...
+    <br>
+    <code>
+      const addFront = (arr) => [].concat('snake', arr)
+    </code>
+    <h4>3.</h4>
+    <code>
+    const removeArr = (arr, animalName) => {
+      let index = arr.indexOf(animalName)
+      return arr.slice(0, index).concat(arr.slice(index + 1))
+    }
+    </code>
+    <h4>4.</h4>
+    <code>
+      const changeOcc = obj => Object.assign({}, obj, {occupation: 'writer'})
+    </code>
+    <br>
+    or...
+    <br>
+    <code>
+      const changeOcc = obj => ({...obj, occupation: 'writer'})
+    </code>
+    <h4>5.</h4>
+    <code>
+      const addName = obj => Object.assign({}, obj, {firstName: 'Issac'})
+    </code>
+    <br>
+    or...
+    <br>
+    <code>
+      const addName = obj => ({...obj, firstName: 'Isaac'})
+    </code>
+    <h4>6.</h4>
+    <code>
+      const addBook = obj => ({...obj, books: obj.books.concat('Pebble in the Sky')})
+    </code>
+    <h4>7.</h4>
+    <code>
+      const addComplete = todos => todos.map(todo => ({...todo, completed: false}))
+    </code>
 </details>
 
 ---
