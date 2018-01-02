@@ -181,24 +181,26 @@ const obj = {
 6. Add 'Pebble in the Sky' to the array of books
 
 
-```js
-let todos = [
-    {todo: "learn to thrash"},
-    {todo: "learn redux"},
-    {todo: "hang tight"},
-    {todo: "stay loose"}
-]
-```
+    ```js
+    let todos = [
+        {todo: "learn to thrash"},
+        {todo: "learn redux"},
+        {todo: "hang tight"},
+        {todo: "stay loose"}
+    ]
+    ```
 
 7. Give each todo a 'completed' field with value 'false'
 
 
 <details>
   <summary><strong> Solutions, <em> try not to peak</em>... </strong></summary>
-    <h4>1.</h4>
-    <code>
+
+    #### 1.
+    ```js
       const addArr = (arr) => [...arr, 'cat', 'mouse']
-    </code>
+    ```
+
     <br>
     or...
     <br>
