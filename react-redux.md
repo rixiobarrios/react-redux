@@ -8,14 +8,15 @@
 
 ## Framing
 > 5 min / 0:05
-We previously covered Redux at a high level, how it works and why it's useful in building applications with React where we're managing a lot of state.
+
+We previously covered Redux at a high level, how it works and why it's useful for building applications with React, particularly when we are managing a lot of state.
 
 We're going to review Redux, build out an example using more complex state, then integrate our working state management with some prebuilt React components.
 
 ## Review: Redux
 > 10 min / 0:15
 
-What are the three parts of Redux? How do they work?
+What are the three parts of Redux? How does each part work?
 
 <details>
 	<summary>**3 Parts of Redux**</summary>
@@ -39,11 +40,6 @@ We are going to build out a simple warehouse inventory management tool using Red
 > 2.5 min / 0:20
 
 Clone down [this repository](https://git.generalassemb.ly/ga-wdi-exercises/react-redux) for the exercise and run `npm install`. 
-
-- build out a warehouse inventory management system with just redux
-- subscribe to store updates with `console.log()` of state
-- write out constants, action creators, reducers, etc
-- dispatch actions in `index.js` to see state updates in the console
 
 ### You Do: Review the Redux solution branch
 > 10 min / 0:30
@@ -69,7 +65,7 @@ touch actions/order.js constants/order.js reducers/order.js store.js
 
 We're creating three directories: `actions/`, `constants/`, and `reducers/`. The `actions/` directory is where we'll build out our action creators - functions that return an object literal representing a redux action. The `reducers/` directory is where we'll build out our reducers - functions that take our current state and an action and return a new, updated state object. The `constants/` directory is where we'll define constant variables representing our action types.
 
-We're grouping related functionality by filename: `order.js`. Splitting functionality in this way is common but comes with a lot of overhead. For an alternative pattern, check out the [Duck Pattern](#duck-pattern) in the Bonus section at the end of this README.
+We're grouping related functionality by filename: `order.js`. Splitting functionality in this way is common but comes with a lot of overhead. For an alternative pattern, check out the [Ducks Pattern](#duck-pattern) in the Bonus section at the end of this README.
 
 Finally, we create a `store.js` file where we'll import Redux and create our `store`.
 
@@ -164,7 +160,7 @@ import orderReducer from './reducers/order'
 export default createStore(orderReducer)
 ```
 
-That's it! (For now.) We import the `createStore` function from redux and our `orderReducer` then invoke the `createStore` function, passing in our reducer function. There is a way to pass in more than one reducer, which you can read about in the [Using Multiple Reducers](#using-multiple-reducers) section of the Bonus section below.
+That's it! (For now.) We import the `createStore` function from redux and our `orderReducer` then invoke the `createStore` function, passing in our reducer function. There is a way to pass in more than one reducer, which you can read about in the [Further Reading](#further-reading) bonus section below.
 
 **Step 5:**
 Our store is all set up and ready to manage state for our application. For now, we'll just `console.log` state updates from `index.js`; in the near future, we'll integrate this with some React components.
@@ -258,7 +254,7 @@ store.dispatch(removeOrder(0))
 Build out the functionality for updating an existing order. Given an id for an order and an object with the property/properties to update, return a new list of orders with the updated order.
 
 <details> 
-<summary>Solution</summary>
+<summary>**Solution**</summary>
 
 **Step 1:**
 ```js
@@ -371,7 +367,7 @@ store.dispatch(createNewOrder('Reputation', 1))
 
 We want to do something very similar, this time from within a React component. We need a way of accessing the store's `dispatch()` method, which we can do with the `connect()` method provided by `react-redux`.
 
-`connect()` takes a React component and wraps it by returning a new component class connected to Redux. `connect()` takes two arguments that we will dive in to later. For now, we just need get our wrapper (returned by `connect()`) and then pass our component to the wrapper:
+`connect()` takes a React component and wraps it by returning a new component class connected to Redux. `connect()` takes two arguments (that we will dive in to later) and returns the wrapper for our component. For now, we just need get our wrapper and then pass our component to the wrapper:
 
 ```js
 const wrapperFunction = connect()
@@ -381,7 +377,7 @@ const NewOrderForm = wrapperFunction(OrderForm)
 const NewOrderForm = connect()(OrderForm)
 ```
 
-If we go and look at our React app in the browser, it won't seem as though anything has changed. But called the wrapper function around our `OrderForm` component does something important: it passes `dispatch()` in to our component as a prop. If we add the following line to the `render()` function of our `OrderForm` component, we'll see `dispatch()` included in the object that is printed to the console:
+If we go and look at our React app in the browser, it won't seem as though anything has changed. But calling the wrapper function around our `OrderForm` component does something important: it passes `dispatch()` in to our component as a prop. If we add the following line to the `render()` function of our `OrderForm` component, we'll see `dispatch()` included in the object that is printed to the console:
 
 ```js
 console.log(props)
