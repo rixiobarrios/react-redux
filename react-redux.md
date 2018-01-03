@@ -7,11 +7,13 @@
 - Dispatch state changes from within React components
 
 ## Framing
+> 5 min / 0:05
 We previously covered Redux at a high level, how it works and why it's useful in building applications with React where we're managing a lot of state.
 
 We're going to review Redux, build out an example using more complex state, then integrate our working state management with some prebuilt React components.
 
 ## Review: Redux
+> 10 min / 0:15
 
 What are the three parts of Redux? How do they work?
 
@@ -29,10 +31,12 @@ That's not really how Redux works, but kind of. All our state is stored in a sin
 </details>
 
 ## Redux
+> 2.5 min / 0:18
 
 We are going to build out a simple warehouse inventory management tool using Redux and React over the course of this lesson. We will start by building out the Redux functionality for review and then integrating it with our React components.
 
 ### We Do: React Redux Warehouse
+> 2.5 min / 0:20
 
 Clone down [this repository](https://git.generalassemb.ly/ga-wdi-exercises/react-redux) for the exercise and run `npm install`. 
 
@@ -42,6 +46,7 @@ Clone down [this repository](https://git.generalassemb.ly/ga-wdi-exercises/react
 - dispatch actions in `index.js` to see state updates in the console
 
 ### You Do: Review the Redux solution branch
+> 10 min / 0:30
 
 Checkout the `solution-redux` branch. Explore the codebase and review the following questions:
 
@@ -53,6 +58,7 @@ Checkout the `solution-redux` branch. Explore the codebase and review the follow
 When you're finished, checkout the `master` branch.
 
 ### We Do: Project setup
+> 5 min / 0:35
 
 First we need to build out the project structure:
 
@@ -68,6 +74,7 @@ We're grouping related functionality by filename: `order.js`. Splitting function
 Finally, we create a `store.js` file where we'll import Redux and create our `store`.
 
 ### I Do: Create a new order
+> 20 min / 0:55
 
 In a few minutes, we'll have full CRUD on our orders using Redux. Let's start by creating a new order.
 
@@ -197,6 +204,7 @@ The callback we're passing in to `subscribe()` is getting the current state and 
 The processes we followed for creating our new order is a good workflow to follow generally when working with Redux. Start by defining a new constant, then create your new action creator, then define or update your reducer and you're ready to dispatch changes to the store.
 
 ### We Do: Remove an order
+> 10 min / 1:05
 
 Now we'll work together to walk through removing an order from the store.
 
@@ -245,6 +253,7 @@ store.dispatch(removeOrder(0))
 ```
 
 ### You Do: Update an order
+> 10 min / 1:15
 
 Build out the functionality for updating an existing order. Given an id for an order and an object with the property/properties to update, return a new list of orders with the updated order.
 
@@ -301,42 +310,170 @@ store.dispatch(updateOrder(0, { status: 'shipped'}))
 
 </details>
 
+## Break
+> 10 min / 1:25
+
 ## Implementing Redux with React
-- build out UI components for our inventory management system
-- take our working store and integrate it with our new UI components
-- add a form for adding items to the warehouse
-  - discuss 2 kinds of state: app state and UI state
-  - not all state needs to be stored in Redux or in components - can use both
-  - modal for form = UI state, control that in a component; inventory = app state, control that in Redux
-- revisit container v presentational components
+> 5 min / 1:30
 
-## We Do: Shopping Cart in Redux (45 min)
+Now that we have Redux working and are managing and updating state inside a Redux store, we're ready to connect our store to our React components. Once we do, we'll be able to dispatch actions to the store from inside our React components. When a user clicks a button or submits a form, we can use Redux to update our state.
 
-[Building a Shopping Cart in Redux](https://git.generalassemb.ly/ga-wdi-exercises/react-redux-shopping-cart)
+### You Do: Review the React-Redux solution branch
+> 10 min / 1:40
+
+Checkout the `solution-react-redux` branch. Explore the codebase and review the following questions:
+
+- Where are we requiring `react-redux`? (The nom package with the React bindings for Redux)
+- Across the codebase, what are we using from `react-redux`?
+- Are we using our actions anywhere inside our components?
+- What might `Provider` be? What might it be doing?
+- What could `connect()` be doing?
+- What about `mapStateToProps()`?
+- What about `mapDispatchToProps()`?
+
+When you're finished, checkout the `master` branch again.
+
+### Connecting Redux and React
+> 10 min / 1:50
+
+We will need some way of accessing our Redux store from inside our React components. The simplest way to do this could be to just pass it around through props, but one of the key benefits of Redux is avoiding having to pass state as props to deeply nested components.
+
+Redux gives us a React component, called `<Provider />` that we can pass our store to as a prop. The `Provider` component will then use use some [magic](https://reactjs.org/docs/context.html) to make our store available to us throughout our component tree.
+
+We can import the `Provider` component from `react-redux` and then pass our `App` component as a child to the `Provider` component:
+
+```js
+// ...
+import { Provider } from "react-redux";
+
+ReactDOM.render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.getElementById("root")
+);
+```
+
+We are now ready to use our Redux managed state from within our React components.
+
+### Creating New Orders
+> 10 min / 2:00
+
+As we've been learning React, we've stressed the difference between presentational and container components. That distinction is really important when working with Redux: we want to keep our containers and our view components separate. If our application state is complex enough that it warrants using Redux, then we likely have either a lot of state we're trying to manage, state that is in a somewhat complex structure to manage or both. Therefore, the distinction between components that affect state and those that just present it is all the more important.
+
+The `OrderForm` component is presentational; we need to build out the corresponding container component using Redux, which we'll do in the `NewOrderForm` component.
+
+When we wanted to create a new order using just Redux, we did so with this line of code:
+
+```js
+store.dispatch(createNewOrder('Reputation', 1))
+```
+
+We want to do something very similar, this time from within a React component. We need a way of accessing the store's `dispatch()` method, which we can do with the `connect()` method provided by `react-redux`.
+
+`connect()` takes a React component and wraps it by returning a new component class connected to Redux. `connect()` takes two arguments that we will dive in to later. For now, we just need get our wrapper (returned by `connect()`) and then pass our component to the wrapper:
+
+```js
+const wrapperFunction = connect()
+const NewOrderForm = wrapperFunction(OrderForm)
+
+// the above is often shortened to:
+const NewOrderForm = connect()(OrderForm)
+```
+
+If we go and look at our React app in the browser, it won't seem as though anything has changed. But called the wrapper function around our `OrderForm` component does something important: it passes `dispatch()` in to our component as a prop. If we add the following line to the `render()` function of our `OrderForm` component, we'll see `dispatch()` included in the object that is printed to the console:
+
+```js
+console.log(props)
+```
+
+We can now use `dispatch()` to send actions to the store and update our state!
+
+The form submission is handled by the `handleSubmit()` method. We need to import the action creator for the action we want to dispatch. Then, if we add the following line to the `handleSubmit()` method, we will be dispatching our action to the store to update our application's state:
+
+```js
+this.props.dispatch(createNewOrder(productName, quantity));
+```
+
+### Passing State from Redux as Props
+> 10 min / 2:10
+
+Now that we can update our state from within our components, it would be nice to read that state and pass it to our presentational components. Outside of React, we used the `getState()` method to read our state; however, the `connect()` method abstracts this away for us.
+
+We'll be working on the `OrderTable` component from now on. We want to pass in our state so that we can render a table of all the outstanding orders. Each row will represent a single order. Each row will also include a button for deleting that order, an input for updating the quantity needed for that order, and a dropdown for changing the order status.
+
+The first argument you can pass in to the `connect()` method is typically called `mapStateToProps`. It's a way of taking the entire state object and returning some subset of it, specifically the part(s) of state that the presentational component will display and nothing more. `mapStateToProps` is a callback that must return an object. A simple version would look something like this:
+
+```js
+const mapStateToProps = state => ({
+	orders: state.orders
+})
+```
+
+Then if we call `connect()` with our `Orders` component, we can get something like this:
+
+```js
+Const OrderTable = connect(mapStateToProps)(Orders)
+```
+
+If we add a `console.log` to our `Orders` component, we'll see the `orders` property containing each of the orders we've added to our store. We can then output these into a table using the `<Table />` and `<TableRow />` components.
+
+### Passing Dispatch Methods
+> 10 min / 2:20
+
+We could at this point make our state updates using `dispatch()` like we did with our form. But `connect()` takes a second argument: `mapDispatchToProps`. It can be either an object or a function.
+
+If it is an object, each property must be an action creator and `connect()` will wrap each function into a call to `dispatch()`. 
+
+More often, you'll see `mapDispatchToProps` defined as a function that returns an object. In that case, the `mapDispatchToProps` function receives `dispatch()` as an argument and each property of the returned object should be a function that calls `dispatch()`, passing in some object creator.
+
+We can use `mapDispatchToProps` to add our remove button to each order table row. If we import the `removeOrder` action creator, we can then create a simple `mapDispatchToProps()` signature that looks like this:
+
+```js
+const mapDispatchToProps = dispatch => ({
+  onRemove: id => dispatch(removeOrder(id))
+})
+```
+
+Then we update our `connect()` call to look like this:
+
+```js
+const OrderTable = connect(mapStateToProps, mapDispatchToProps)(Orders);
+```
+
+Now we'll have an `onRemove()` method passed into our `Orders` component as a prop and we can use this in the `onClick` handler for our button to remove an order.
+
+## You Do: Update an Order
+> 10 min / 2:30
+
+Add a method to your `mapDispatchToProps()` that takes an id for an order and an update objected dispatches an action using the `updateOrder` action creator.
+
+## Closing
+
+We've covered a lot here so be sure to go back and review, ensuring your can explain what each part is doing. Believe it or not, what we've covered here really only scratches the surface of what you can do with Redux. For more, review the [Redux documentation](https://redux.js.org/docs), specifically the sections listed in the [Further Reading](#further-reading) section below.
 
 ## Bonus
 
-## Further Reading
+### You Do: Shopping Cart in Redux
+
+If you're looking for some extra practice, try building out the following [Shopping Cart](https://git.generalassemb.ly/ga-wdi-exercises/react-redux-shopping-cart) exercise.
+
+### Further Reading
 
 We've just scratched the surface of what you can accomplish with Redux. Review the Redux documentation for more:
 
 - [Updating state without mutating it (immutability)](https://redux.js.org/docs/recipes/reducers/ImmutableUpdatePatterns.html)
 - [Using Redux with React Router](https://redux.js.org/docs/advanced/UsageWithReactRouter.html)
 - [Working with asynchronous actions](https://redux.js.org/docs/advanced/AsyncActions.html)
+- [Using `combineReducers`](https://redux.js.org/docs/recipes/reducers/UsingCombineReducers.html)
 - [Reducing boilerplate](https://redux.js.org/docs/recipes/ReducingBoilerplate.html)
 - [Structuring reducers](https://redux.js.org/docs/recipes/StructuringReducers.html)
 
-## Using Multiple Reducers
+### Ducks Pattern
 
-> `combineReducers()`
+The way we've organized our store, constants, reducers and actions is very common among applications that use Redux. But it has one major downside: if we want to add or modify a feature, we need to do so across at least 3 different files. If our application is big (or even if it isn't that big), this could become tedious.
 
-## Duck Pattern
-The [ducks](https://github.com/erikras/ducks-modular-redux) pattern
-- lots of files for related actions
-- `ducks` from the last syllabul of redux
-- organize code into "modules" with types, actions and reducers all in one file
-
-> build out warehouse solution branch using duck pattern
+The [ducks](https://github.com/erikras/ducks-modular-redux) pattern is a way of organizing your reducers, actions and constants by module. 
 
 
 
