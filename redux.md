@@ -8,7 +8,7 @@
 - Explain what problem Redux Solves
 - Talk through updating state in an app that uses Redux
 
-## What is Redux? (5 min, 2:35)
+## What is Redux? (5 min, 0:05)
 
 Redux is a state management library.
 It solves the problem of having a bunch of localized component states by funneling them into a central hub.
@@ -32,7 +32,7 @@ With the [Redux Devtools Chrome Extension](https://chrome.google.com/webstore/de
 
 **Take a moment to install the [Redux Devtools Chrome Extension](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd?hl=en)**
 
-## Use Case (10 min, 2:45)
+## Use Case (10 min, 0:15)
 
 Let's take 5 minutes to read through a blog post written by the creator of Redux, Dan Abramov.
 
@@ -60,17 +60,26 @@ Functional programming presents us with the challenge of having to think in new 
 
 ---
 
-## Functional Programming and the React Ecosystem (10 min, 2:55)
+## Functional Programming and the React Ecosystem (10 min, 0:25)
 
 You may hear developers talking about how functional programming is revolutionizing Javascript and wonder how this is so.
 Let's revisit the concept of a pure function: given any input, a ***pure function*** will return the exact same output.
 It will also ***have no side effects***.
+
+No side effects means that the function doesn't modify anything outside its own scope.
+
 This means that the **pure function** is *only concerned* with returning some output that is a function of its input.
 
 Impure functions include:
   - `Math.random()`
   - `new Date().getTime()`
   - `$.ajax()`
+  - `[].push()`
+
+Pure functions include:
+  - `[].map()`
+  - `[].reduce()`
+  - `Object.assign()`
 
 Part of the power of React is this very idea applied to views. We pass in props a component, and we get the same predictable component every time.
 
@@ -82,7 +91,7 @@ Ultimately, these aggregated functions will provide the functionality of Redux.
 
 ## Concepts of Redux
 
-### Application State &  Immutability in Redux (15 min, 3:10)
+### Application State & Immutability in Redux (25 min, 0:50)
 
 Simply put, state is a representation of your application's data. Redux manages your application's state, encapsulating the data stored in your variables, in something called **The Store**.
 When using Redux, we want to treat application state in such a way that it is always ***copied*** and never directly mutated.
@@ -108,12 +117,35 @@ let cat = {
 let copiedCat = Object.assign({}, cat)
 ```
 
+Note: this only works for shallow copies. It doesn't do a proper deep copy (properties more than 1 level nested are still referenced to the old object).
+
+> Example of shallow copy:
+```js
+let cat = {
+  name: "Meowy Mandel",
+  meowy: true,
+  friends: {
+    sparkles: true,
+    rufus: false
+  }
+}
+
+let newCat = Object.assign({}, cat)
+
+newCat.friends.sparkles = false;
+cat.meowy = false;
+
+console.log(cat);
+console.log(newCat);
+```
+
 `...` or the spread operator gives us a nice way of combining arrays.
 It exposes or "unwraps" the values in an array.
 
 ```js
 let fruits = ["Tomato", "Cucumber", "Pumpkin"]
 let updatedFruits = [...fruits, "Avocado"]
+console.log(updatedFruits); // ["Tomato", "Cucumber", "Pumpkin", "Avocado"]
 ```
 
 The above code is equivalent to this:
@@ -151,8 +183,9 @@ It's an easy mistake to make, since there is a one letter difference.
 
 `.slice()` ***is not a mutator method***. Use it for ***copying*** all or part of an array!
 
+## Break (10 min / 1:00)
 
-### You Do: Practice with Immutable Data and Pure Functions (20 min, 3:30)
+### You Do: Practice with Immutable Data and Pure Functions (20 min, 1:20)
 > Write pure functions to complete the following without mutating state
 
 ```js
@@ -164,7 +197,6 @@ const arr = ['fish', 'bird', 'dog', 'monkey', 'turtle']
 2. Add 'snake' to the front of the array
 
 3. Delete 'monkey' from the array
-
 
 ```js
 const obj = {
@@ -192,10 +224,8 @@ const obj = {
 
 7. Give each todo a 'completed' field with value 'false'  
 
-
-
 <details>
-  <summary><strong> Solutions, <em> try not to peak... </em></strong></summary>
+  <summary><strong> Solutions, <em> try not to peek... </em></strong></summary>
 
 
   #### 1.
@@ -272,9 +302,7 @@ const obj = {
 
 ---
 
-## Break (10 min, 3:40)
-
-## Elements of Redux (20 min, 4:00)
+## Elements of Redux (20 min, 1:40)
 
 ### The Store
 
@@ -303,6 +331,15 @@ The minimum requirement for an action is that the action must have a type proper
   [This serialization is important for Redux's time travel feature.](https://github.com/reactjs/redux/blob/master/docs/faq/Actions.md#actions-string-constants)
 </details>
 
+> Example action:
+```js
+function incrementScore(index) {
+  return {
+    type: 'INCREMENT_SCORE',
+    index: index
+  }
+}
+```
 
 ### The Reducer
 
@@ -362,7 +399,7 @@ class Store {
   > Called when an action is dispatched
 
 
-## We Do: Building a Counter in Redux (50 min, 4:50)
+## We Do: Building a Counter in Redux (50 min / 2:30)
 
 [Building a Counter in Redux](https://git.generalassemb.ly/ga-wdi-exercises/react-redux-counter)
 
