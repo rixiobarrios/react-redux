@@ -224,8 +224,6 @@ const obj = {
 
 7. Give each todo a 'completed' field with value 'false'  
 
-
-
 <details>
   <summary><strong> Solutions, <em> try not to peek... </em></strong></summary>
 
@@ -333,6 +331,15 @@ The minimum requirement for an action is that the action must have a type proper
   [This serialization is important for Redux's time travel feature.](https://github.com/reactjs/redux/blob/master/docs/faq/Actions.md#actions-string-constants)
 </details>
 
+> Example action:
+```js
+function incrementScore(index) {
+  return {
+    type: 'INCREMENT_SCORE',
+    index: index
+  }
+}
+```
 
 ### The Reducer
 
@@ -392,7 +399,7 @@ class Store {
   > Called when an action is dispatched
 
 
-## We Do: Building a Counter in Redux (50 min, 4:50)
+## We Do: Building a Counter in Redux (50 min / 2:30)
 
 [Building a Counter in Redux](https://git.generalassemb.ly/ga-wdi-exercises/react-redux-counter)
 
