@@ -24,27 +24,50 @@ What are the three parts of Redux? How does each part work?
 
   <summary>**3 Parts of Redux**</summary>
 
-1. Warehouse (Store)
-2. Robot Minions (Reducers)
-3. Invoices (Actions)
+1. Store
+2. Reducers
+3. Actions
 
-Redux works a lot like Amazon does.
+</details>
 
-There's this massive warehouse (the store) with all this stuff in it. This
+But there's more to Redux than the three parts! How does Redux work? Well, it works a lot like Amazon does.
+
+There's this massive warehouse with all this stuff in it. This
 warehouse is way to large for poor ol' Jeff Bezos to run by himself so, being
-the eccentric billionaire that he is, he's built a horde or Robot Minions
-(reducers) to manage it for him.
+the eccentric billionaire that he is, he's built a horde or Robot Minions to manage it for him.
 
 Each Robot Minion is in charge of some part of the warehouse. Whenever someone
-needs something from the warehouse an Invoice (action) is sent to the warehouse,
+needs something from the warehouse an Invoice is sent to the warehouse,
 to the appropriate Robot Minion, who then carries out the order.
 
-That's not really how Redux works, but kind of. All our state is stored in a
-single place (the warehouse). Whenever we want to update our state, we do so
-with a reducer (Robot Minion). The reducer needs to know what operation you're
-asking it to perform on the current state and any new data that should become
-part of state, which it does through a object literal called an action
-(Invoice).
+### Think Pair Share: Which is Which?
+
+We just discussed how there are three parts to Redux:
+
+1. Store
+2. Reducers
+3. Actions
+
+And how Redux is similar to Amazon:
+
+1. Warehouse
+2. Robot Minions
+3. Invoices
+
+But which is which? Which part of Amazon is the Reducer, the Store or the Actions?
+
+Turn and talk with your neighbor or the people in your row.
+
+<details>
+
+  <summary>**Solution**</summary>
+
+So Redux doesn't really work the same way Amazon does, but kind of. All our
+state is stored in a single place (the warehouse). Whenever we want to update
+our state, we do so with a reducer (Robot Minion). The reducer needs to know
+what operation you're asking it to perform on the current state and any new data
+that should become part of state, which it does through a object literal called
+an action (Invoice).
 
 </details>
 
@@ -60,6 +83,12 @@ components.
 Clone down [this
 repository](https://git.generalassemb.ly/ga-wdi-exercises/react-redux) for the
 exercise and run `npm install`.
+
+```sh
+git clone git@git.generalassemb.ly:ga-wdi-exercises/react-redux.git
+cd react-redux
+npm install
+```
 
 ### You Do: Review the Redux solution branch (10 min / 0:30)
 
@@ -78,13 +107,19 @@ When you're finished, checkout the `master` branch.
 First we need to build out the project structure:
 
 ```sh
-# inside of src/
+cd src/
 mkdir actions constants reducers
 touch actions/order.js constants/order.js reducers/order.js store.js
+cd ..
 ```
 
-We're creating three directories: `actions/`, `constants/`, and `reducers/`. The
-`actions/` directory is where we'll build out our action creators - functions
+We're creating three directories:
+
+  1. `actions/`
+  2. `constants/`
+  3. `reducers/`
+
+The `actions/` directory is where we'll build out our action creators - functions
 that return an object literal representing a redux action. The `reducers/`
 directory is where we'll build out our reducers - functions that take our
 current state and an action and returns a new, updated state object. The
